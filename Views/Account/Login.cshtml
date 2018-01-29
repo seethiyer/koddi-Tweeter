@@ -1,0 +1,90 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@model LoginViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "Log in";
+    Layout = "_AccountLayout";
+}
+
+<style>
+    .left-bgColor {
+        background-color: #1DA1F2;
+    }
+
+    .full-height {
+        height: 100vh;
+    }
+
+    .input {
+        display: inline-block;
+        width: 210px;
+        padding: 4px;
+        margin: 0;
+        outline: 0;
+        background-color: #fff;
+        border: 1px solid #e6ecf0;
+        border-radius: 3px;
+    }
+
+    .EdgeButton {
+        border-radius: 100px;
+        box-shadow: none;
+        cursor: pointer;
+        font-weight: bold;
+        text-align: center;
+        white-space: nowrap;
+        background-color: #fff;
+        border: 1px solid #1da1f2;
+        color: #1da1f2;
+        margin-right:10px;
+        line-height:20px;
+    }
+
+    .LoginDiv {
+        margin-top:20px;
+    }
+
+    .CreateAccountDiv{
+        margin:20px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-6 left-bgColor full-height"></div>
+    <div class="col-md-6">
+        <div class="clearfix">
+            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                <div class="LoginDiv">
+                    <input asp-for="Email" class="input" placeholder="email" />
+                    <input asp-for="Password" class="input" placeholder="password" />
+                    <button type="submit" class="EdgeButton">Log in</button>
+                    <a asp-action="ForgotPassword">Forgot password?</a>
+                </div>
+                <div asp-validation-summary="All" class="text-danger"></div>
+            </form>
+        </div>
+
+        <div class="CreateAccountDiv">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="~/images/Tweeter.jpg"  />
+                </div>
+                <div class="col-md-8">
+                    <text style="font-size:xx-large;word-wrap:break-word;">See what's happening in the world right now</text>
+                    <br />
+                    <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" class="EdgeButton">
+                        <text style="margin:5px;height:20px;">Join Tweeter today.</text>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
